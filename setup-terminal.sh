@@ -20,18 +20,22 @@ header() {
 header "Created by Phunt_Vieg_"
 sleep 2
 header "Edited by yay99857"
+sleep 2
+clear
 
 cd ~
 
 header "Updating packages..."
 sudo pacman -Syu --noconfirm
 
+sleep 1
 clear
 header "Setting locale en_US.UTF-8"
 sudo sed -i '/^#en_US.UTF-8 UTF-8/s/^#//' /etc/locale.gen
 sudo locale-gen
 sudo localectl set-locale LANG=en_US.UTF-8
 
+sleep 1
 header "==> Download yay package manager"
 sudo pacman -S --noconfirm --needed base-devel git
 git clone https://aur.archlinux.org/yay.git
@@ -58,9 +62,11 @@ pkgs=(
 )
 sudo pacman -S --noconfirm "${pkgs[@]}"
 
+sleep 1
 header "Allow pip3 install by removing EXTERNALLY-MANAGED file"
 sudo rm -rf $(python3 -c "import sys; print(f'/usr/lib/python{sys.version_info.major}.{sys.version_info.minor}/EXTERNALLY-MANAGED')")
 
+sleep 1
 header "Download pwndbg and pwntools"
 git clone --depth=1 https://github.com/pwndbg/pwndbg
 cd pwndbg
