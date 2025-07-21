@@ -17,21 +17,22 @@ header() {
    ${BLD}${CRE}[ ${CYE}${text} ${CRE}]${CNC}\n\n"
 }
 
-header "==> Created by Phunt_Vieg_"
+header "Created by Phunt_Vieg_"
+sleep 2
 header "Edited by yay99857"
 
 cd ~
 
-echo "==> Updating system packages..."
+header "Updating packages..."
 sudo pacman -Syu --noconfirm
 
-
-echo "==> Setting locale"
+clear
+header "Setting locale en_US.UTF-8"
 sudo sed -i '/^#en_US.UTF-8 UTF-8/s/^#//' /etc/locale.gen
 sudo locale-gen
 sudo localectl set-locale LANG=en_US.UTF-8
 
-echo "==> Download some terminal tool"
+header "==> Download yay package manager"
 sudo pacman -S --noconfirm --needed base-devel git
 git clone https://aur.archlinux.org/yay.git
 cd yay
@@ -57,36 +58,38 @@ pkgs=(
 )
 sudo pacman -S --noconfirm "${pkgs[@]}"
 
-echo "==> Allow pip3 install by removing EXTERNALLY-MANAGED file"
+header "Allow pip3 install by removing EXTERNALLY-MANAGED file"
 sudo rm -rf $(python3 -c "import sys; print(f'/usr/lib/python{sys.version_info.major}.{sys.version_info.minor}/EXTERNALLY-MANAGED')")
 
-echo "==> Download pwndbg and pwntools"
+header "Download pwndbg and pwntools"
 git clone --depth=1 https://github.com/pwndbg/pwndbg
 cd pwndbg
 ./setup.sh
 cd ..
 pip3 install pwntools
 
-echo "==> Config Oh-My-Posh"
+clear
+header "Oh-My-Posh"
 sudo wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-amd64 -O /usr/local/bin/oh-my-posh
 sudo chmod +x /usr/local/bin/oh-my-posh
 
-echo "==> Download file config"
+clear
+header "Downloading dotfiles"
 git clone --depth=1 https://github.com/yay99857/Dotfiles.git ~/dotfiles
 git clone --depth=1 https://github.com/tmux-plugins/tpm ~/dotfiles/.tmux/plugins/tpm
 
-echo "==> Stow"
+clear
+header "Stow"
 cd ~/dotfiles
 rm -rf .git README.md
 stow -t ~ .
 cd ~
 
-echo "==> Change shell"
+clear
+header "Setting zsh to default shell"
 ZSH_PATH="$(which zsh)"
 grep -qxF "$ZSH_PATH" /etc/shells || echo "$ZSH_PATH" | sudo tee -a /etc/shells
 chsh -s "$ZSH_PATH"
 
-
-echo
+clear
 header "==> Please restart your terminal to finish."
-echo

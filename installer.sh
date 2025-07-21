@@ -50,42 +50,52 @@ cd ~
 header "==> Updating system packages..."
 sudo pacman -Syu --noconfirm
 
+clear
 header "==> Setup Terminal"
 bash -c "$(curl -fSL https://raw.githubusercontent.com/yay99857/arch-hyprland/main/setup-terminal.sh)"
 
+clear
 header "==> Make executable"
 sudo chmod +x ~/dotfiles/.config/yay9857/*
 
+clear
 header "==> Download wallpaper"
 git clone --depth 1 https://github.com/ViegPhunt/Wallpaper-Collection.git ~/Wallpaper-Collection
 mkdir -p ~/Pictures/Wallpapers
 mv ~/Wallpaper-Collection/Wallpapers/* ~/Pictures/Wallpapers
 rm -rf ~/Wallpaper-Collection
 
-echo "==> Install package"
+clear
+header "==> Install package"
 ~/dotfiles/.config/yay9857/install_archpkg.sh
 
-echo "==> PIP Install"
+clear
+header "==> PIP Install"
 pip3 install Pillow
 
-echo "==> Enable bluetooth"
+clear
+header "==> Enable bluetooth"
 sudo systemctl enable --now bluetooth
 
-echo "==> Enable networkmanager"
+header "==> Enable networkmanager"
 sudo systemctl enable --now NetworkManager
 
-echo "==> Set Ghostty as the default terminal emulator for Nemo"
+clear
+header "==> Set Ghostty as the default terminal emulator for Nemo"
 gsettings set org.cinnamon.desktop.default-applications.terminal exec ghostty
 
-echo "==> Set Cursor"
+clear
+header "==> Set Cursor"
 ~/dotfiles/.config/yay9857/setcursor.sh
 
-echo "==> Stow dotfiles"
+clear
+header "==> Stow dotfiles"
 cd ~/dotfiles
 stow -t ~ .
 cd ~
 
-echo "==> Check display manager"
+clear
+header "==> Check display manager"
 if [[ ! -e /etc/systemd/system/display-manager.service ]]; then
     sudo systemctl enable sddm
     echo -e "[Theme]\nCurrent=sugar-candy" | sudo tee -a /etc/sddm.conf
@@ -95,5 +105,4 @@ fi
 
 clear
 echo
-echo "*********************************************************************"
-echo "*********************************************************************"
+header "Installation successfully."
