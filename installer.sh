@@ -50,20 +50,22 @@ cd ~
 header "==> Updating system packages..."
 sudo pacman -Syu --noconfirm
 
+sleep 3
 clear
 header "==> Setup Terminal"
 bash -c "$(curl -fSL https://raw.githubusercontent.com/yay99857/arch-hyprland/main/setup-terminal.sh)"
 
+sleep 2
 clear
 header "==> Make executable"
 sudo chmod +x ~/dotfiles/.config/yay9857/*
 
 clear
-header "==> Download wallpaper"
-git clone --depth 1 https://github.com/ViegPhunt/Wallpaper-Collection.git ~/Wallpaper-Collection
+header "==> Download wallpapers"
+git clone --depth 1 https://github.com/yay99857/wallpapers.git ~/Wallpapers
 mkdir -p ~/Pictures/Wallpapers
-mv ~/Wallpaper-Collection/Wallpapers/* ~/Pictures/Wallpapers
-rm -rf ~/Wallpaper-Collection
+mv ~/Wallpapers/Wallpapers/* ~/Pictures/Wallpapers
+rm -rf ~/Wallpapers
 
 clear
 header "==> Install package"
