@@ -72,10 +72,6 @@ header "==> Install package"
 ~/dotfiles/.config/yay9857/install_archpkg.sh
 
 clear
-header "==> PIP Install"
-pip3 install Pillow
-
-clear
 header "==> Enable bluetooth"
 sudo systemctl enable --now bluetooth
 
