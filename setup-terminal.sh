@@ -99,7 +99,6 @@ sudo chmod +x /usr/local/bin/oh-my-posh
 clear
 header "Downloading dotfiles"
 git clone --depth=1 https://github.com/yay99857/Dotfiles.git ~/dotfiles
-git clone --depth=1 https://github.com/tmux-plugins/tpm ~/dotfiles/.tmux/plugins/tpm
 
 clear
 header "Stow"
